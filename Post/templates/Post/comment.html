@@ -1,0 +1,66 @@
+{% extends 'Post/base.html' %}
+{% load staticfiles %}
+{% block nav %}
+    <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <form action="" method="get">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
+                    <i class="material-icons">search</i>
+                </label>
+                <div class="mdl-textfield__expandable-holder">
+                    <input class="mdl-textfield__input" type="text" id="sample6" name="query">
+                    <label class="mdl-textfield__label" for="sample-expandable">Expandable Input</label>
+                </div>
+            </div>
+        </form>
+        <a class="mdl-navigation__link" href="{% url 'user:create_article' %}">Create Post</a>
+        <a class="mdl-navigation__link" href="{% url 'user:all_user' %}">Users</a>
+        <a class="mdl-navigation__link" href="{% url 'user:profile' email %}">{{ username }}</a>
+        <a class="mdl-navigation__link" href="{% url 'user:logout' %}">Logout</a>
+
+    </nav>
+{% endblock %}
+{% block content %}
+    <div class="comment-block">
+        <ul class="comment-container">
+
+            {% for comment in comments %}
+                <li>
+                    <div class="comment-card">
+
+                        <div class="comment-time"><h5>{{ comment.comment_at|date }}</h5></div>
+                        <h3 class="comment-content">{{ comment.comment }}</h3>
+                        <a href="{% url 'user:profile' comment.user.email %}"><h5
+                                class="comment-email">{{ comment.user.get_username }}</h5></a>
+                    </div>
+                </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+    <div class="create-comment">
+        <div class="post create-comment-box">
+            <div class="bar" id="bar">
+                <h3 class="login-title">Create Comment</h3>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <ul>
+                    {% for field in form %}
+                        <li>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                {{ field }}
+                                <label class="mdl-textfield__label" for="{{ field.name }}">{{ field.label }}</label>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <button type="submit"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect"
+                        id="btn_create">
+                    Post Comment
+                </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'User/base.html' %}
+{% if current_user %}
+    {% block nav %}
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a class="mdl-navigation__link" href="{% url 'user:profile' current_user %}">{{ username }}</a>
+            <a class="mdl-navigation__link" href="{% url 'user:logout' %}">Logout</a>
+        </nav>
+    {% endblock %}
+{% endif %}
+{% block content %}
+    {% if users %}
+        <ul class="demo-list-item mdl-list">
+            {% for user in users %}
+                <a href="{% url 'user:profile' user.get_short_name %}">
+                    <li class="mdl-list__item">{{ user.get_full_name }}&nbsp;({{ user.get_short_name }})</li>
+                </a>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h5 class="error-message">* No user matching your query</h5>
+    {% endif %}
+{% endblock %}

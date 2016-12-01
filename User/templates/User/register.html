@@ -1,0 +1,38 @@
+{% extends 'User/base.html' %}
+{% load staticfiles %}
+{% block custom_style %}
+    <link rel="stylesheet" href="{% static 'User/css/login_style.css' %}">
+{% endblock %}
+
+{% block nav %}
+    <nav class="mdl-navigation mdl-layout--large-screen-only">
+
+        <a class="mdl-navigation__link" href="{% url 'user:login' %}">Login</a>
+        <a class="mdl-navigation__link" href="{% url 'user:register' %}">Register</a>
+
+
+    </nav>
+{% endblock %}
+{% block content %}
+    <div class="post">
+        <div class="bar">
+            <h3 class="login-title">Login User</h3>
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <ul>
+                {% for field in form %}
+                    <li>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            {{ field }}
+                            <label class="mdl-textfield__label" for="{{ field.name }}">{{ field.label }}</label>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect"
+                    type="submit" id="btn">{{ button_text }}</button>
+
+        </form>
+    </div>
+{% endblock %}

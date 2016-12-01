@@ -1,0 +1,25 @@
+{% extends 'User/base.html' %}
+{% load staticfiles %}
+{% block custom_style %}
+    <link rel="stylesheet" href="{% static 'User/css/login_style.css' %}" xmlns="http://www.w3.org/1999/html">
+{% endblock %}
+{% block nav %}
+    <a class="mdl-navigation__link" href="{% url 'user:create_article' %}">Create Post</a>
+    <a class="mdl-navigation__link" href="{% url 'user:all_user' %}">Users</a>
+    <a class="mdl-navigation__link" href="{% url 'user:profile' email %}">{{ username }}</a>
+    <a class="mdl-navigation__link" href="{% url 'user:logout' %}">Logout</a>
+{% endblock %}
+{% block content %}
+    {% if friends %}
+        <ul>
+            {% for f in friends %}
+                <li>
+                    <a href="{% url 'user:profile' f.friend_email %}"
+                       class="mdl-button mdl-js-button mdl-button--raised mdl-button--primary" id="friend-button">{{ f.get_friend_username }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h5>You don't have any friends</h5>
+    {% endif %}
+{% endblock %}

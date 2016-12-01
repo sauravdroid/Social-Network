@@ -1,0 +1,150 @@
+.post {
+    width: 400px;
+    display: block;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+    padding-bottom: 55px;
+}
+
+ul {
+    list-style: none;
+}
+
+#header_row {
+    background-color: #253447;
+}
+
+#logo {
+    margin-left: -45px;
+    font-family: aleron;
+    font-size: 35px;
+    color: #DFBC78;
+}
+
+@font-face {
+    font-family: timber;
+    src: url('../Fonts/Timber%20Font/Timber.ttf');
+}
+
+@font-face {
+    font-family: aleron;
+    src: url('../Fonts/Ailerons/Ailerons-Typeface.otf');
+}
+
+a {
+    text-decoration: none;
+}
+
+.demo-list-item {
+    margin: 0 auto;
+    width: 400px;
+}
+
+.error-message {
+    border: 2px;
+    position: relative;
+    margin-top: 100px;
+    left: 38%;
+    color: #b92c28;
+}
+
+.profile-button {
+    position: fixed;
+    top: 10px;
+    left: 20px;
+}
+
+#btn-add {
+    right: 20px;
+    bottom: 30px;
+    position: fixed;
+    margin-right: 20px;
+    border-radius: 19px;
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.16);
+}
+
+#can_send_request {
+    position: relative;
+    top: 10px;
+    left: 20px;
+}
+
+.post-friends {
+    top: 80px;
+    display: block;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+    width: 230px;
+    position: fixed;
+    right: 20px;
+}
+
+.post-friends h5 {
+    margin: 0;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+#friend-button {
+    width: 150px;
+    margin-bottom: 20px;
+
+}
+
+#edit {
+    float: right;
+    margin-top: 2px;
+    margin-right: 25px;
+}
+
+#description {
+    float: right;
+    margin-right: 10px;
+}
+
+#plus-one {
+    position: relative;
+    margin-left: 80px;
+}
+
+.like-count {
+    background-color: #e91e63;
+/ / border: 2 px solid #e91e63;
+    height: 30px;
+    width: 30px;
+    border-radius: 3px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: -30px;
+    margin-left: 20px;
+}
+
+.like-count h5 {
+    position: relative;
+    margin: 0 auto;
+    font-size: 18px;
+    color: #fff;
+    left: 9px;
+    top: 7px;
+}
+
+.comment-count {
+    background-color: transparent;
+    margin-top: 6px;
+    height: 20px;
+    width: 20px;
+    border-radius: 3px;
+    margin-bottom: -30px;
+    float: right;
+    margin-right: -90px;
+}
+
+.comment-count h5 {
+    position: relative;
+    margin: 0 auto;
+    font-size: 14px;
+    color: #212121;
+    left: 5px;
+    top: 3px;
+}

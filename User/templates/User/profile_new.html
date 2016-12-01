@@ -1,0 +1,132 @@
+{% extends 'User/base.html' %}
+{% load staticfiles %}
+{% block custom_style %}
+    <link rel="stylesheet" href="{% static 'User/css/post_box.css' %}">
+
+{% endblock %}
+{% block nav %}
+    <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <form action="" method="get">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
+                    <i class="material-icons">search</i>
+                </label>
+                <div class="mdl-textfield__expandable-holder">
+                    <input class="mdl-textfield__input" type="text" id="sample6" name="query">
+                    <label class="mdl-textfield__label" for="sample-expandable">Expandable Input</label>
+                </div>
+            </div>
+        </form>
+        <a class="mdl-navigation__link" href="{% url 'user:create_article' %}">Create Post</a>
+        <a class="mdl-navigation__link" href="{% url 'user:all_user' %}">Users</a>
+        <a class="mdl-navigation__link" href="{% url 'user:profile' email %}">{{ username }}</a>
+        <a class="mdl-navigation__link" href="{% url 'user:logout' %}">Logout</a>
+
+    </nav>
+{% endblock %}
+{% block content %}
+    {% if error_message %}
+        <script>
+            alert({{ error_message }});
+        </script>
+    {% endif %}
+    {% if user_email %}
+        <!--<h5 id="can_send_request">{{ is_friend }}</h5>-->
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored profile-button">{{ user_email }}</button>
+    {% else %}
+        <a href="{% url 'user:friends' %}"
+           class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored profile-button">Friends</a>
+        <div class="post-friends">
+            <h5>Requests</h5>
+            {% if friend_requests %}
+                <form action="" method="post">
+                    <ul>
+                        {% for request in friend_requests %}
+                            <li>
+                                <span>{{ request.get_username }}</span>
+                                <!-- Colored icon button -->
+
+                                {% csrf_token %}
+                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored"
+                                        type="submit"
+                                        name="accept_request" value="{{ request.requested_user_email }}">
+                                    <i class="material-icons">done</i>
+                                </button>
+
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </form>
+            {% else %}
+                <ul>
+                    <li>No Requests</li>
+                </ul>
+            {% endif %}
+        </div>
+    {% endif %}
+    <div class="post-block">
+        {% if posts %}
+            {% for post in posts %}
+                <div class="post-container">
+                    <h2 class="post-title">{{ post.title }}</h2>
+                    <hr>
+                    <h3 class="post-body">{{ post.body }}</h3>
+                    <div class="like-count">
+                        <h5>{{ post.likes }}</h5>
+                    </div>
+                    {% if is_friend == "true" or create_post == "true" %}
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <a class="mdl-button mdl-js-button mdl-button--icon edit btn-edit mdl-button--icon mdl-button--colored"
+                               id="edit" href="{% url 'post:get_post' post.id %}">
+                                <i class="material-icons ">forum</i>
+                            </a>
+                            <button class="mdl-button mdl-js-button mdl-button--icon edit btn-plus-one mdl-button--icon mdl-button--colored"
+                                    id="description">
+                                <i class="material-icons">description</i>
+                            </button>
+                            <button class="mdl-button mdl-js-button mdl-button--icon edit btn-plus-one mdl-button--icon mdl-button--colored"
+                                    type="submit" id="plus-one" name="like_post" value="{{ post.id }}">
+                                <i class="material-icons">thumb_up</i>
+                            </button>
+                            <div class="comment-count">
+                                <h5>{{ post.comment_count }}</h5>
+                            </div>
+                            <h5></h5>
+                        </form>
+                    {% else %}
+                        <a class="mdl-button mdl-js-button mdl-button--icon edit btn-edit"
+                           id="edit">
+                            <i class="material-icons ">forum</i>
+                        </a>
+                        <button class="mdl-button mdl-js-button mdl-button--icon edit btn-plus-one"
+                                id="description">
+                            <i class="material-icons">description</i>
+                        </button>
+                        <button class="mdl-button mdl-js-button mdl-button--icon edit btn-plus-one"
+                                id="plus-one">
+                            <i class="material-icons">thumb_up</i>
+                        </button>
+                        <div class="comment-count">
+                            <h5>{{ post.comment_count }}</h5>
+                        </div>
+                        <h5></h5>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    {% if create_post == "false" and can_send_request == "true" %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect"
+                    type="submit" id="btn-add" name="add_friend" value="add_friend">Add Friend
+            </button>
+        </form>
+    {% endif %}
+    <script type="text/javascript">
+        var is_friend = "{{ is_friend }}";
+        //alert(is_friend);
+    </script>
+{% endblock %}

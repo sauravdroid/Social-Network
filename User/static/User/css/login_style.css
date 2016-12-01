@@ -1,0 +1,35 @@
+#btn{
+    position: relative;
+    float: right;
+    margin-right: 20px;
+    border-radius: 19px;
+    box-shadow: 0 12px 20px rgba(0,0,0,0.16);
+}
+#btn_create{
+    background-color: #3F51B5;
+    position: relative;
+    float: right;
+    margin-right: 20px;
+    border-radius: 19px;
+    box-shadow: 0 12px 20px rgba(0,0,0,0.16);
+}
+.post{
+    position: relative;
+    margin: 0 auto;
+    margin-top:5%;
+}
+.bar{
+    position: relative;
+    width: inherit;
+    height: 50px;
+    border-radius: 4px 4px 0 0;
+    background-color: #3F51B5;
+
+}
+.login-title{
+    position: absolute;
+    margin-top: 5px;
+    left: 15px;
+    color:#fff;
+    font-size: 20px;
+}
